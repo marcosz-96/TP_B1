@@ -44,7 +44,6 @@ namespace Biblioteca
                         Console.WriteLine("Opción incorrecta. Ingrese una opcón del menú");
                         break;
                 }
-
             }
         }
     }
