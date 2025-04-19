@@ -53,18 +53,21 @@ namespace Biblioteca.Clases
                     int cantidadPaginas = int.Parse(Console.ReadLine());
                     Libro libro = new Libro(autor, titulo, anio, cantidadPaginas);
                     libros.Add(libro);
+                    Console.WriteLine("Libro agregado exitosamente!");
                     break;
                 case "2":
                     Console.Write("Ingrese cuantos MBs pesa el ebook: ");
                     int pesoMB = int.Parse(Console.ReadLine());
                     Ebook ebook = new Ebook(autor, titulo, anio, pesoMB);
                     ebooks.Add(ebook);
+                    Console.WriteLine("Ebook agregado exitosamente!");
                     break;
                 case "3":
                     Console.Write("Ingrese el volumen de la revista: ");
                     int volumen = int.Parse(Console.ReadLine());
                     Revista revista = new Revista(autor, titulo, anio, volumen);
                     revistas.Add(revista);
+                    Console.WriteLine("Revista agregada exitosamente!");
                     break;
                 default:
                     Console.WriteLine("Opción incorrecta, seleccione una opción del menú.");
@@ -72,7 +75,7 @@ namespace Biblioteca.Clases
             }
         }
 
-        public void ElimninarLibros(Libro libros)
+        public void ElimninarLibrosFisicos(Libro libros)
         {
             //la siguiente función recorre y compara el título ingresado para luego eliminarlo de la lista
             Console.Write("Ingrese el título del libro que desea eliminar de la lista: ");
@@ -130,6 +133,35 @@ namespace Biblioteca.Clases
                 {
                     Console.WriteLine($"No se encontró la revista con el título {titulo}");
                 }
+            }
+        }
+
+        public void EliminarLibros(Libro libros, Ebook ebooks, Revista revistas)
+        {
+            /*Esta es una función general con un submenu que llama a las funciones de eliminar según 
+            el tipo de bibliografía que se deseé eliminar*/
+            Console.WriteLine(" Seleccione el tipo de libro que desea eliminar");
+            Console.WriteLine("<--------------------------------------------->");
+            Console.WriteLine("1. Libros Físicos");
+            Console.WriteLine("2. Libros virtuales (ebooks)");
+            Console.WriteLine("3. Revistas");
+            Console.Write("Opcion: ");
+            string opcion = Console.ReadLine();
+
+            switch (opcion)
+            {
+                case "1":
+                    ElimninarLibrosFisicos(libros);
+                    break;
+                case "2":
+                    ElimninarEbooks(ebooks);
+                    break;
+                case "3":
+                    ElimninarRevistas(revistas);
+                    break;
+                default:
+                    Console.WriteLine("Opción incorrectar. Ingrese un opción del menú.");
+                    break;
             }
         }
         public MaterialBibliografico(string titulo, int anio)
