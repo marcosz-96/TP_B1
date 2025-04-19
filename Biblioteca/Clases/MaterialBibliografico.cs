@@ -15,7 +15,7 @@ namespace Biblioteca.Clases
         private List<Ebook> ebooks;
         private List<Revista> revistas;
 
-        public void AgregarLibros()
+        public void AgregarBibliografia()
         {
             /*en la primera parte de la función "AgregarLibros" solicitamos los datos generales con los que estamos
             trabajando, luego creamos un submenú de opciones donde se pediran los datos especificos de las 
@@ -75,73 +75,12 @@ namespace Biblioteca.Clases
             }
         }
 
-        public void ElimninarLibrosFisicos(Libro libros)
-        {
-            //la siguiente función recorre y compara el título ingresado para luego eliminarlo de la lista
-            Console.Write("Ingrese el título del libro que desea eliminar de la lista: ");
-            string titulo = Console.ReadLine();
-
-            foreach (var libro in libros.titulo)
-            {
-                if (libros.titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase))
-                {
-                    libros.titulo.Remove(libro);
-                    Console.WriteLine($"Se eliminó de la lista el libro con el título {titulo}");
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine($"No se encontró el libro con el título {titulo}");
-                }
-            }
-        }
-        public void ElimninarEbooks(Ebook ebooks)
-        {
-            //la siguiente función recorre y compara el título ingresado para luego eliminarlo de la lista
-            Console.Write("Ingrese el título del libro que desea eliminar de la lista: ");
-            string titulo = Console.ReadLine();
-
-            foreach (var ebook in ebooks.titulo)
-            {
-                if (ebooks.titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase))
-                {
-                    ebooks.titulo.Remove(ebook);
-                    Console.WriteLine($"Se eliminó de la lista el Ebook con el título {titulo}");
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine($"No se encontró el Ebook con el título {titulo}");
-                }
-            }
-        }
-        public void ElimninarRevistas(Revista revistas)
-        {
-            //la siguiente función recorre y compara el título ingresado para luego eliminarlo de la lista
-            Console.Write("Ingrese el título del libro que desea eliminar de la lista: ");
-            string titulo = Console.ReadLine();
-
-            foreach (var revista in revistas.titulo)
-            {
-                if (revistas.titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase))
-                {
-                    revistas.titulo.Remove(revista);
-                    Console.WriteLine($"Se eliminó de la lista la revista con el título {titulo}");
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine($"No se encontró la revista con el título {titulo}");
-                }
-            }
-        }
-
-        public void EliminarLibros(Libro libros, Ebook ebooks, Revista revistas)
+        public void EliminarBibliografia()
         {
             /*Esta es una función general con un submenu que llama a las funciones de eliminar según 
             el tipo de bibliografía que se deseé eliminar*/
             Console.WriteLine(" Seleccione el tipo de libro que desea eliminar");
-            Console.WriteLine("<--------------------------------------------->");
+            Console.WriteLine("<---------------------------------------------->");
             Console.WriteLine("1. Libros Físicos");
             Console.WriteLine("2. Libros virtuales (ebooks)");
             Console.WriteLine("3. Revistas");
@@ -151,16 +90,76 @@ namespace Biblioteca.Clases
             switch (opcion)
             {
                 case "1":
-                    ElimninarLibrosFisicos(libros);
+                    //la siguiente función recorre y compara el título ingresado para luego eliminarlo de la lista
+                    Console.Write("Ingrese el título del Libro que desea eliminar de la lista: ");
+                    string eliminarLibro = Console.ReadLine();
+
+                    bool existeLibro = true;
+                    
+                    List<Libro> libros = new List<Libro>();
+
+                    foreach (var libro in libros.ToList()) //utilizamos ToList para no realizar modificaciones mientras se recorre la lista
+                    {
+                        if(existeLibro == libro.titulo.Equals(eliminarLibro, StringComparison.OrdinalIgnoreCase))
+                        {
+                            libros.Remove(libro);
+                            Console.WriteLine($"Se eliminó de la lista el libro con el título {eliminarLibro}");
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"No se encontró el libro con el título {eliminarLibro}");
+                        }
+                    }
                     break;
                 case "2":
-                    ElimninarEbooks(ebooks);
+                    //la siguiente función recorre y compara el título ingresado para luego eliminarlo de la lista
+                    Console.Write("Ingrese el título del Ebook que desea eliminar de la lista: ");
+                    string eliminarEbook = Console.ReadLine();
+
+                    bool existeEbook = true;
+
+                    List<Ebook> ebooks = new List<Ebook>();
+
+                    foreach (var ebook in ebooks.ToList())
+                    {
+                        if (existeEbook == ebook.titulo.Equals(eliminarEbook, StringComparison.OrdinalIgnoreCase))
+                        {
+                            ebooks.Remove(ebook);
+                            Console.WriteLine($"Se eliminó de la lista el Ebook con el título {eliminarEbook}");
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"No se encontró el Ebook con el título {eliminarEbook}");
+                        }
+                    }
                     break;
                 case "3":
-                    ElimninarRevistas(revistas);
+                    //la siguiente función recorre y compara el título ingresado para luego eliminarlo de la lista
+                    Console.Write("Ingrese el título del Revista que desea eliminar de la lista: ");
+                    string eliminarRevista = Console.ReadLine();
+
+                    bool existeRevista = true;
+
+                    List<Revista> revistas = new List<Revista>();
+
+                    foreach (var revista in revistas.ToList())
+                    {
+                        if (existeRevista == revista.titulo.Equals(eliminarRevista, StringComparison.OrdinalIgnoreCase))
+                        {
+                            revistas.Remove(revista);
+                            Console.WriteLine($"Se eliminó de la lista la revista con el título {eliminarRevista}");
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"No se encontró la revista con el título {eliminarRevista}");
+                        }
+                    }
                     break;
                 default:
-                    Console.WriteLine("Opción incorrectar. Ingrese un opción del menú.");
+                    Console.WriteLine("Opción incorrecta. Ingrese un opción del menú.");
                     break;
             }
         }
